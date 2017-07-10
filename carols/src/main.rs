@@ -17,8 +17,8 @@ const LYRICS: &'static [&'static str] = &[
 fn main() {
     for day in 1..13 {
         println!("On the {} day of Christmas my true love gave to me", ordinal(day));
-        for index in (12 - day)..12 {
-            println!("{}", LYRICS[index as usize]);
+        for &line in LYRICS[(12 - day) as usize..].iter() {
+            println!("{}", line);
         }
         println!("");
     }
