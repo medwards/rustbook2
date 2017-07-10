@@ -1,4 +1,3 @@
-// TODO: str vs String?
 const LYRICS: &'static [&'static str] = &[
     "Twelve Ladies Dancing",
     "Eleven Lords a-Leaping",
@@ -15,16 +14,22 @@ const LYRICS: &'static [&'static str] = &[
 ];
 
 fn main() {
-    for day in 1..13 {
-        println!("On the {} day of Christmas my true love gave to me", ordinal(day));
-        for &line in LYRICS[(12 - day) as usize..].iter() {
-            println!("{}", line);
+    for day in 0..12 {
+        println!("On the {} day of Christmas my true love gave to me", ordinal(day + 1));
+        for (line_no, &line) in LYRICS[(11 - day) as usize..].iter().enumerate() {
+            if line_no as u32 + (11 - day) == 11 && day > 0 {
+                // awkwardly detect if this is the last line
+                println!("and {}", line);
+            } else {
+                println!("{}", line);
+            }
         }
         println!("");
     }
 }
 
 fn ordinal(x: u32) -> String {
+    // Has to return a String because of catchall arm
     match x {
         1 => String::from("First"),
         2 => String::from("Second"),
