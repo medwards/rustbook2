@@ -89,9 +89,7 @@ fn command(command: &String, company: &mut Company) {
         "list" => company.list_department(&command_parts.get(1).unwrap_or(&String::from("all"))),
         "_debug" => println!("{:#?}", company.employees),
         "_demo" => company._demo(),
-        // TODO: can this be shortened?
-        "quit" => exit(0),
-        "exit" => exit(1),
+        "quit" | "exit" => exit(0),
         _ => print_help()
     }
 }
