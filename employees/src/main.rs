@@ -41,11 +41,7 @@ impl Company {
         };
         employees.sort();
         println!("Employees in {}", department.to_uppercase());
-        for employee in employees.iter() {
-            // TODO: clean up trailing comma
-            print!("{}, ", employee);
-        }
-        println!("");
+        println!("{}", employees.join(", "));
     }
 
     fn _demo(&mut self) {
