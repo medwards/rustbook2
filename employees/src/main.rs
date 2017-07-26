@@ -75,17 +75,9 @@ fn main() {
 fn command(command: &String, company: &mut Company) {
     let command_parts: Vec<_> = command.trim().split(" ").map(|w| String::from(w)).collect();
     match command_parts[0].to_lowercase().as_ref() {
-        // TODO: holy crap...
-        "add" => match command_parts.len() {
-            4 => match command_parts.get(2) {
-                Some(to) => match to.as_ref() {
-                    "to" => company.add_employee(&command_parts[1], &command_parts[3]),
-                    _ => failed_add()
-                },
-                None => failed_add()
-            },
-            _ => failed_add()
-        },
+        "add" if command_parts.len() == 4 && command_parts[2].to_lowercase() == "to" =>
+            company.add_employee(&command_parts[1], &command_parts[3]),
+        "add" => failed_add(),
         "list" => company.list_department(&command_parts.get(1).unwrap_or(&String::from("all"))),
         "_debug" => println!("{:#?}", company.employees),
         "_demo" => company._demo(),
