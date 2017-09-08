@@ -1,15 +1,15 @@
 use std::cmp::PartialOrd;
 
-fn largest<T: PartialOrd>(list: &[T]) -> &T {
-    let mut largest = list[0];
+fn largest<'a, T: PartialOrd>(list: &[T]) -> &T {
+    let mut largest = &list[0];
 
-    for &item in list.iter() {
+    for item in list.iter() {
         if item > largest {
             largest = item;
         }
     }
 
-    &largest
+    largest
 }
 
 fn main() {
@@ -23,7 +23,7 @@ fn main() {
     let result = largest(&chars);
     println!("The largest char is {}", result);
 
-    let strings = vec!["foo".to_string(), "bar".to_string(), "baz".to_string()];
+    let strings = vec!["foo", "bar", "baz"];
 
     let result = largest(&strings);
     println!("The largest string is {}", result);
